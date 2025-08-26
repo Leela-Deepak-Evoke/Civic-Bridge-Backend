@@ -1,5 +1,5 @@
 // middleware/firebaseAuth.js
-const admin = require('../middleware/firebase'); // initialized Firebase Admin SDK
+const admin = require('./firebase'); // initialized Firebase Admin SDK
 const User = require('../models/User.model');
 
 const authenticate = async (req, res, next) => {
