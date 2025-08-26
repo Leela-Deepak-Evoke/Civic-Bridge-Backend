@@ -8,10 +8,10 @@ app.use(cors({ origin: config.CORS_ORIGIN }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-const chatRoutes = require('../Backend/server/routes/chat.routes.js');
-const userRoutes = require('../Backend/server/routes/user.routes.js');
-const issueRoutes = require('../Backend/server/routes/issue.routes.js');
-const commentRoutes = require('../Backend/server/routes/comment.routes.js');
+const chatRoutes = require("./server/routes/chat.routes.js");
+const userRoutes = require('./server/routes/user.routes.js');
+const issueRoutes = require('./server/routes/issue.routes.js');
+const commentRoutes = require('./server/routes/comment.routes.js');
 
 app.use('/api/chats', chatRoutes);
 app.use('/api/users',userRoutes);
