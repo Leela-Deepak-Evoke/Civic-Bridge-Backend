@@ -22,11 +22,12 @@ exports.addComment = async (req, res) => {
     }
 };
 
-// Update comment (by user only)
+
+// Update comment (by user or admin)
 exports.updateComment = async (req, res) => {
     try {
         const { issueId, commentId } = req.params;
-        const { userId, comment } = req.body;
+        const { userId, comment, role } = req.body;
 
         const issue = await Issue.findById(issueId);
         if (!issue) return res.status(404).json({ success: false, message: "Issue not found" });
@@ -34,7 +35,8 @@ exports.updateComment = async (req, res) => {
         const com = issue.comments.id(commentId);
         if (!com) return res.status(404).json({ success: false, message: "Comment not found" });
 
-        if (String(com.user) !== userId) {
+        // Allow admin OR the comment owner
+        if (role !== 'admin' && String(com.user) !== userId) {
             return res.status(403).json({ success: false, message: "Unauthorized to update this comment" });
         }
 
@@ -46,6 +48,7 @@ exports.updateComment = async (req, res) => {
         res.status(500).json({ success: false, message: err.message });
     }
 };
+
 
 
 // Delete comment (by admin only)
