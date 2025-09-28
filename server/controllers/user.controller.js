@@ -32,7 +32,8 @@ const loginUser = async (req, res) => {
             firebaseUid: localId,
             idToken,
             refreshToken,
-            expiresIn
+            expiresIn,
+            role: user.role,
         });
 
     } catch (error) {
